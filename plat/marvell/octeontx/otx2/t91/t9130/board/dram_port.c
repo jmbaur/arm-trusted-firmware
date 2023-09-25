@@ -105,12 +105,14 @@ int spd_crc16_sr(u8 *ptr, int count) {
 	crc = 0;
 	while (--count >= 0) {
 		crc = crc ^ (int)*ptr++ << 8;
-		for (i = 0; i < 8; ++i)
+		for (i = 0; i < 8; ++i) {
 			if (crc & 0x8000) {
 				crc = crc << 1 ^ 0x1021;
 			} else {
 				crc = crc << 1;
 			}
+		}
+	}
 	return (crc & 0xFFFF);
 }
 
@@ -251,8 +253,8 @@ void plat_marvell_dram_update_topology(void)
 			 sizeof(tm->spd_data.all_bytes));
 
 		/* if SPD is empty, then copy default configuration as SPD */
-		if (spd_verify_correction_sr(tm->spd_data.all_bytes))
+		if (spd_verify_correction_sr(tm->spd_data.all_bytes)) {
 			set_param_based_on_som_strap();
-
+		}
 	}
 }
