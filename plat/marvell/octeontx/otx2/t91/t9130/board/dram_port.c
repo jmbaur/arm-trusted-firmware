@@ -176,21 +176,20 @@ void set_param_based_on_som_strap (){
 
 	/* read gpio value to check if ECC exist or not */
 	if (read_gpio_strap_sr ((u32) 0xf2440110, (u8) 10)){
-		printf("w/ecc; strap value=1\n\n");
-		dram_iface_ap0.tm.bus_act_mask=MV_DDR_64BIT_ECC_PUP8_BUS_MASK;
+		printf("w/ ecc; strap value=1\n");
+		dram_iface_ap0.tm.bus_act_mask = MV_DDR_64BIT_ECC_PUP8_BUS_MASK;
 	}
 	else {
-		dram_iface_ap0.tm.bus_act_mask=MV_DDR_64BIT_BUS_MASK;
-		printf("w/o ecc; strap value=0\n\n");
+		dram_iface_ap0.tm.bus_act_mask =MV_DDR_64BIT_BUS_MASK;
+		printf("w/o ecc; strap value=0\n");
 	}
 	/* read gpio value to check 4GB or 8GB configuration */
-	if (!read_gpio_strap_sr ((u32) 0xf2440110, (u8) 11)){
+	if (read_gpio_strap_sr ((u32) 0xf2440110, (u8) 11)){
 		dram_iface_ap0.tm.interface_params[0].memory_size=MV_DDR_DIE_CAP_16GBIT;
-		printf("8GB capacity; strap value=1\n\n");
-	}
-	else{
+		printf("8GB capacity; strap value=1\n");
+	} else {
 		dram_iface_ap0.tm.interface_params[0].memory_size=MV_DDR_DIE_CAP_8GBIT;
-		printf("4GB capacity; strap value=1\n\n");
+		printf("4GB capacity; strap value=0\n");
 	}
 }
 
