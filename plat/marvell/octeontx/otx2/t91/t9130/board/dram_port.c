@@ -54,7 +54,6 @@ struct mv_ddr_iface dram_iface_ap0 = {
 #if DDR32
 		MV_DDR_32BIT_ECC_PUP8_BUS_MASK,	/* subphys mask */
 #else
-		MV_DDR_64BIT_ECC_PUP8_BUS_MASK,	/* subphys mask */
 		MV_DDR_64BIT_BUS_MASK,
 #endif
 		MV_DDR_CFG_SPD,			/* ddr configuration data src */
