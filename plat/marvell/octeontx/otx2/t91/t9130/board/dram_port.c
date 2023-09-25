@@ -176,7 +176,7 @@ void set_param_based_on_som_strap (){
 	/* read gpio value to check if ECC exist or not */
 	if (read_gpio_strap_sr ((u32) 0xf2440110, (u8) 10)){
 		printf("w/ecc; strap value=1\n\n");
-	       	dram_iface_ap0.tm.bus_act_mask=MV_DDR_64BIT_ECC_PUP8_BUS_MASK;
+		dram_iface_ap0.tm.bus_act_mask=MV_DDR_64BIT_ECC_PUP8_BUS_MASK;
 	}
 	else {
 		dram_iface_ap0.tm.bus_act_mask=MV_DDR_64BIT_BUS_MASK;
